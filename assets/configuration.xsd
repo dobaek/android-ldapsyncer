@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ldap">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="server" type="xs:string" />
+              <xs:element name="port" type="xs:int" />
+              <xs:element name="binddn" type="xs:string" />
+              <xs:element name="password" type="xs:string" />
+              <xs:element name="basedn" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="settings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="identifier">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="OnAndroid" type="xs:string" />
+                    <xs:element name="OnLdap" type="xs:string" />
+                    <xs:element name="DNLeafOnLdap" type="xs:string" />
+                    <xs:element name="DNLeafOnLdapCopy" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="delete" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="OnAndroid" type="xs:boolean" />
+                    <xs:element name="OnLdap" type="xs:boolean" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="create" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="OnAndroid" type="xs:boolean" />
+                    <xs:element name="OnLdap" type="xs:boolean" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="change" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="OnAndroid" type="xs:boolean" />
+                    <xs:element name="OnLdap" type="xs:boolean" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ldapClass" minOccurs="1" type="xs:string" />
+              <xs:element name="alwaysWins" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:boolean">
+                      <xs:attribute name="source" use="required">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="ldap" />
+                            <xs:enumeration value="android" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:attribute>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="allChangesFrom" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:boolean">
+                      <xs:attribute name="source" use="required">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:enumeration value="ldap" />
+                            <xs:enumeration value="android" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:attribute>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="mapping">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="attribute" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ldap" type="xs:string" />
+                    <xs:element name="android">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string" />
+                          <xs:element name="type" type="xs:string" minOccurs="0" />
+                          <xs:element name="kind" type="xs:string" minOccurs="0"/>
+                          <xs:element name="typeLabel" type="xs:string" minOccurs="0"/>
+                          <xs:element name="directory" type="xs:string" minOccurs="0"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <EditTextPreference
+    android:key="data_directory"
+    android:title="Data directory"
+    android:summary="The directory where configuration and database reside in"
+    android:dialogTitle="Data directory" />
+</PreferenceScreen>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration xmlns="http://www.mathes.jp/LDAPSyncer"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.mathes.jp/LDAPSyncer configuration.xsd">
+  <ldap>
+    <!--your LDAP connection information -->
+    <server>HOST</server>
+    <port>389</port>
+    <binddn>BINDDN</binddn>  <!-- the user used to query the LDAP directory -->
+    <password>PASSWORD</password>
+    <basedn>BASEDN</basedn> <!-- the node in the LDAP tree under which the contacts to be synced are stored -->
+  </ldap>
+  <settings>
+    <!--  this section contains general settings to influence the behavior of LDAPSyncer  -->
+    <identifier>
+      <!-- the ID in LDAP (OnLdap) and Android (OnAndroid), this entry is used to match LDAP and
+           Android entries and should not be empty -->
+      <OnAndroid>android.provider.Contacts$People.NAME</OnAndroid>
+      <OnLdap>fileAs</OnLdap>
+      <!-- the DN of newly created entries in LDAP, may or may not be the same as the ID (OnLdap) -->
+      <DNLeafOnLdap>cn</DNLeafOnLdap>
+      <!-- one or more fields that get the same value as DNLeafOnLDAP when creating new entries in LDAP -->
+      <DNLeafOnLdapCopy>sn</DNLeafOnLdapCopy>
+      <!-- the LDAP class used when creating entries in LDAP -->
+      <ldapClass>evolutionPerson</ldapClass>
+    </identifier>
+    <delete>
+      <!-- determines if delete operations should be performed on Android and/or in LDAP -->
+      <OnAndroid>true</OnAndroid>
+      <OnLdap>false</OnLdap>
+    </delete>
+    <create>
+      <!-- determines if create operations should be performed on Android and/or in LDAP -->
+      <OnAndroid>true</OnAndroid>
+      <OnLdap>false</OnLdap>
+    </create>
+    <change>
+      <!-- determines if change/update operations should be performed on Android and/or in LDAP -->
+      <OnAndroid>true</OnAndroid>
+      <OnLdap>false</OnLdap>
+    </change>
+    <alwaysWins source="ldap">false</alwaysWins>
+    <allChangesFrom source="ldap">false</allChangesFrom>
+  </settings>
+  <mapping>
+    <!-- this section contains the mappings from LDAP attributes to Android
+         ldap - contains the name of the LDAP field (mandatory)
+         attribute.name - contains the name of the attribute in Android (mandatory)
+         attribute.directory - the subdirectory in which this value has to be saved if
+                               not existent it is saved directly at People
+         attribute.type - for some attributes the type of the entry, e.g. "home" or "office"
+                          for the telephone number, mail or postal address
+         attribute.typeLabel - for type "TYPE_CUSTOM" there may be a free text label to
+                               describe the type
+         attribute.kind - for the subdirectory ContactMethods there is kind (e.g. email, postal)
+                          beside a type (e.g. home, office)
+    -->
+    <attribute>
+      <ldap>fileAs</ldap>
+      <android>
+        <name>android.provider.Contacts$People.NAME</name>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>note</ldap>
+      <android>
+        <name>android.provider.Contacts$People.NOTES</name>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>category</ldap>
+      <android>
+        <name>android.provider.Contacts$Organizations.COMPANY</name>
+        <type>android.provider.Contacts$Organizations.TYPE_CUSTOM</type>
+        <typeLabel>Category</typeLabel>
+        <directory>android.provider.Contacts$Organizations.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>o</ldap>
+      <android>
+        <name>android.provider.Contacts$Organizations.COMPANY</name>
+        <type>android.provider.Contacts$Organizations.TYPE_WORK</type>
+        <directory>android.provider.Contacts$Organizations.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>birthDate</ldap>
+      <android>
+        <name>android.provider.Contacts$Organizations.COMPANY</name>
+        <type>android.provider.Contacts$Organizations.TYPE_CUSTOM</type>
+        <typeLabel>BirthDate</typeLabel>
+        <directory>android.provider.Contacts$Organizations.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>anniversary</ldap>
+      <android>
+        <name>android.provider.Contacts$Organizations.COMPANY</name>
+        <type>android.provider.Contacts$Organizations.TYPE_CUSTOM</type>
+        <typeLabel>Anniversary</typeLabel>
+        <directory>android.provider.Contacts$Organizations.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>mail</ldap>
+      <android>
+        <name>android.provider.Contacts$ContactMethods.DATA</name>
+        <type>android.provider.Contacts$ContactMethods.TYPE_OTHER</type>
+        <kind>android.provider.Contacts.KIND_EMAIL</kind>
+        <directory>android.provider.Contacts$People$ContactMethods.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>mobile</ldap>
+      <android>
+        <name>android.provider.Contacts$Phones.NUMBER</name>
+        <type>android.provider.Contacts$Phones.TYPE_MOBILE</type>
+        <directory>android.provider.Contacts$People$Phones.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>telephoneNumber</ldap>
+      <android>
+        <name>android.provider.Contacts$Phones.NUMBER</name>
+        <type>android.provider.Contacts$Phones.TYPE_WORK</type>
+        <directory>android.provider.Contacts$People$Phones.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>homePhone</ldap>
+      <android>
+        <name>android.provider.Contacts$Phones.NUMBER</name>
+        <type>android.provider.Contacts$Phones.TYPE_HOME</type>
+        <directory>android.provider.Contacts$People$Phones.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>otherPhone</ldap>
+      <android>
+        <name>android.provider.Contacts$Phones.NUMBER</name>
+        <type>android.provider.Contacts$Phones.TYPE_OTHER</type>
+        <directory>android.provider.Contacts$People$Phones.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>facsimileTelephoneNumber</ldap>
+      <android>
+        <name>android.provider.Contacts$Phones.NUMBER</name>
+        <type>android.provider.Contacts$Phones.TYPE_FAX_WORK</type>
+        <directory>android.provider.Contacts$People$Phones.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>otherFacsimileTelephoneNumber</ldap>
+      <android>
+        <name>android.provider.Contacts$Phones.NUMBER</name>
+        <type>android.provider.Contacts$Phones.TYPE_FAX_HOME</type>
+        <directory>android.provider.Contacts$People$Phones.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>postalAddress</ldap>
+      <android>
+        <name>android.provider.Contacts$ContactMethods.DATA</name>
+        <type>android.provider.Contacts$ContactMethods.TYPE_WORK</type>
+        <kind>android.provider.Contacts.KIND_POSTAL</kind>
+        <directory>android.provider.Contacts$People$ContactMethods.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>homePostalAddress</ldap>
+      <android>
+        <name>android.provider.Contacts$ContactMethods.DATA</name>
+        <type>android.provider.Contacts$ContactMethods.TYPE_HOME</type>
+        <kind>android.provider.Contacts.KIND_POSTAL</kind>
+        <directory>android.provider.Contacts$People$ContactMethods.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+    <attribute>
+      <ldap>otherPostalAddress</ldap>
+      <android>
+        <name>android.provider.Contacts$ContactMethods.DATA</name>
+        <type>android.provider.Contacts$ContactMethods.TYPE_OTHER</type>
+        <kind>android.provider.Contacts.KIND_POSTAL</kind>
+        <directory>android.provider.Contacts$People$ContactMethods.CONTENT_DIRECTORY</directory>
+      </android>
+    </attribute>
+  </mapping>
+</configuration>

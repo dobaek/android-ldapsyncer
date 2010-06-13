@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LDAPSyncer</string>
+    <string name="button_startSync">Start Sync</string>
+    <string name="button_stopSync">Stop Sync</string>
+</resources>
+

@@ -1,0 +1,15 @@
+preconditions:
+- delete, create, change on LDAP/Android = true;
+- allwaysWins/allChangesFrom Android/LDAP = false
+
+tests:
+- sync completely from LDAP to Android
+- add Entry in LDAP
+- add Entry in Android
+- change Entry in LDAP
+- change Entry in Android
+- change Antry in LDAP and Android
+- create same Entry in LDAP and Android
+- delete Entry in LDAP
+- delete Entry in Android
+- delete Entry in both LDAP and Android

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/textViewSeparator1"></TextView>
+  <Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:visibility="visible" android:text="@+string/button_startSync" android:id="@+id/button_startSync"/>
+  <Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:visibility="gone" android:text="@+string/button_stopSync" android:id="@+id/button_stopSync"/>
+  <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/textViewSeparator2"></TextView>
+  <ScrollView android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" android:id="@+id/ScrollView_Log">
+    <TextView android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/textView_Log" android:scrollbars="vertical" android:selectAllOnFocus="true"></TextView>
+  </ScrollView>
+</LinearLayout>
