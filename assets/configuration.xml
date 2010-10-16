@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<configuration xmlns="http://www.mathes.jp/LDAPSyncer"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://www.mathes.jp/LDAPSyncer configuration.xsd">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://www.mathes.jp/LDAPSyncer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mathes.jp/LDAPSyncer configuration.xsd">
   <ldap>
     <!--your LDAP connection information -->
     <server>HOST</server>
@@ -23,10 +20,10 @@
       <!-- one or more fields that get the same value as DNLeafOnLDAP when creating new entries in LDAP -->
       <DNLeafOnLdapCopy>sn</DNLeafOnLdapCopy>
       <!-- the LDAP class used when creating entries in LDAP -->
-      <ldapClass>evolutionPerson</ldapClass>
     </identifier>
+    <ldapClass>evolutionPerson</ldapClass>  
+     <!-- determines if delete operations should be performed on Android and/or in LDAP --> 
     <delete>
-      <!-- determines if delete operations should be performed on Android and/or in LDAP -->
       <OnAndroid>true</OnAndroid>
       <OnLdap>false</OnLdap>
     </delete>
